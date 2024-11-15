@@ -4,6 +4,7 @@ import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { NextRequest } from 'next/server';
+import { defaultProvider } from '@aws-sdk/credential-provider-node';
 
 
 interface IPInfo {
@@ -187,7 +188,10 @@ function getClientIP(headers: Headers): IPInfo {
 
 
 
-const client = new DynamoDBClient({ region: 'ap-northeast-1' });
+const client = new DynamoDBClient({
+  region: process.env.AWS_REGION || 'ap-northeast-1',
+  credentials: defaultProvider(),
+});
 const docClient = DynamoDBDocumentClient.from(client);
 
 export const dynamic = 'force-dynamic';
