@@ -18,7 +18,7 @@ interface IPInfo {
   };
 }
 
-export function getClientIP(headers: Headers): IPInfo {
+function getClientIP(headers: Headers): IPInfo {
   // 基础配置
   const config = {
     privateIPRanges: [
