@@ -85,7 +85,10 @@ const GET = async () => {
   return new Response(buffer, {
     headers: {
       'Content-Type': 'image/png',
-      'Content-Length': buffer.length.toString()
+      'Content-Length': buffer.length.toString(),
+      'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      'Pragma': 'no-cache',
+      'Expires': '0',
     },
   });
 };
