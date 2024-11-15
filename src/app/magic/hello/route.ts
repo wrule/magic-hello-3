@@ -9,7 +9,7 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
   ctx.shadowColor = '#39FF14';
   ctx.shadowBlur = 3;
   ctx.fillStyle = '#39FF14';
-  ctx.font = '12px monospace';
+  ctx.font = '12px';
 
   ctx.beginPath();
   ctx.strokeStyle = '#39FF14';
@@ -46,6 +46,25 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
     ctx.textBaseline = 'middle';
     ctx.fillText('vis', x, y);
   }
+
+  ctx.font = '14px';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  const meText = 'Me';
+  const meMetrics = ctx.measureText(meText);
+  const centerX = 100;
+  const centerY = 60;
+
+  ctx.fillStyle = '#020314';
+  ctx.fillRect(
+    centerX - meMetrics.width/2 - 2,
+    centerY - 7,
+    meMetrics.width + 4,
+    14,
+  );
+
+  ctx.fillStyle = '#39FF14';
+  ctx.fillText(meText, centerX, centerY);
 
   ctx.font = '12px';
   ctx.textAlign = 'left';
