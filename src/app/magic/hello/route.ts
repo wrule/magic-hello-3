@@ -65,6 +65,8 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
   ctx.fillStyle = 'white';
   ctx.fillText(meText, centerX, centerY);
 
+  ctx.fillStyle = '#39FF14';
+
   ctx.font = '12px';
   ctx.textAlign = 'left';
   ctx.textBaseline = 'bottom';
