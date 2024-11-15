@@ -3,6 +3,7 @@ import { headers } from 'next/headers';
 import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { NextRequest } from 'next/server';
 
 
 interface IPInfo {
@@ -268,17 +269,22 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
 }
 
 export
-const GET = async () => {
+const GET = async (
+  request: NextRequest,
+  { params }: { params: { id: string } },
+) => {
+
   const headersList = headers();
   const clientInfo = getClientIP(headersList);
+
+  const key = `${clientInfo.ip}-${params.id}`;
 
   (async () => {
     try {
       const results = await docClient.send(new PutCommand({
         TableName: 'visitor',
         Item: {
-          pKey: Math.random().toString(),
-          sortKey: Math.random().toString(),
+          pKey: key,
           time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
           ...clientInfo,
         },
