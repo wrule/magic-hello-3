@@ -1,6 +1,10 @@
 import dayjs from 'dayjs';
 import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
-import { DynamoDBClient, ListTablesCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient, PutItemCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
+
+const client = new DynamoDBClient({ region: 'ap-northeast-1' });
+const docClient = DynamoDBDocumentClient.from(client);
 
 export const dynamic = 'force-dynamic';
 
@@ -84,11 +88,17 @@ export
 const GET = async () => {
 
   (async () => {
-    const client = new DynamoDBClient({ region: 'ap-northeast-1' });
-    const command = new ListTablesCommand({ });
     try {
-      const results = await client.send(command);
-      console.log(results.TableNames?.join("\n"));
+      const results = await docClient.send(new PutCommand({
+        TableName: 'visitor',
+        Item: {
+          pKey: Math.random().toString(),
+          sortKey: Math.random().toString(),
+          time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          name: 'jimao',
+        },
+      }));
+      console.log(results);
     } catch (err) {
       console.error(err);
     }
