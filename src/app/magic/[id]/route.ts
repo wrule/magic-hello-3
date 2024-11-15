@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { headers } from 'next/headers';
 import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, PutCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { NextRequest } from 'next/server';
 
 
@@ -281,19 +281,29 @@ const GET = async (
 
   (async () => {
     try {
-      const results = await docClient.send(new PutCommand({
+      const updateResponse = await docClient.send(new UpdateCommand({
         TableName: 'visitor',
-        Item: {
+        Key: {
           pKey: key,
-          sortKey: key,
-          time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-          count: 0,
-          ...clientInfo,
+          sortKey: key
         },
+        UpdateExpression: 'SET #count = if_not_exists(#count, :zero) + :one, #time = :time, #info = :info',
+        ExpressionAttributeNames: {
+          '#count': 'count',
+          '#time': 'time',
+          '#info': 'clientInfo'
+        },
+        ExpressionAttributeValues: {
+          ':zero': 0,
+          ':one': 1,
+          ':time': dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          ':info': clientInfo
+        },
+        ReturnValues: 'ALL_NEW'
       }));
-      console.log(results);
+      console.log('Updated:', updateResponse.Attributes);
     } catch (error) {
-      console.error(error);
+      console.error('Error:', error);
     }
   })();
 
