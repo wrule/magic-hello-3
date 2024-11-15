@@ -30,7 +30,7 @@ function screenDrawing(ctx: SKRSContext2D) {
   ctx.fillText(dayjs().format('MM-DD HH:mm:ss'), 3, 2);
 
   ctx.textAlign = 'right';
-  ctx.fillText(`visits: ${32}`, 197, 2);
+  ctx.fillText(`visits: ${3224334}`, 197, 2);
 
   ctx.textAlign = 'left';
   ctx.textBaseline = 'bottom';
