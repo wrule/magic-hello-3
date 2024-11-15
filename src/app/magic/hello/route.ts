@@ -2,7 +2,7 @@ import { join } from 'path';
 import dayjs from 'dayjs';
 import { createCanvas, GlobalFonts, SKRSContext2D } from '@napi-rs/canvas';
 
-function screenDrawing(ctx: SKRSContext2D) {
+function screenDrawing(ctx: SKRSContext2D, visits: number) {
   ctx.fillStyle = '#020314';
   ctx.fillRect(0, 0, 200, 120);
 
@@ -30,7 +30,7 @@ function screenDrawing(ctx: SKRSContext2D) {
   ctx.fillText(dayjs().format('MM-DD HH:mm:ss'), 3, 2);
 
   ctx.textAlign = 'right';
-  ctx.fillText(`visits: ${3224334}`, 197, 2);
+  ctx.fillText(`visits: ${visits}`, 197, 2);
 
   // 在屏幕中心添加 "Me"
   ctx.textAlign = 'center';
@@ -48,7 +48,7 @@ const GET = async () => {
   const canvas = createCanvas(200, 120);
   const ctx = canvas.getContext('2d');
 
-  screenDrawing(ctx);
+  screenDrawing(ctx, 3);
 
   const buffer = await canvas.encode('png');
   return new Response(buffer, {
