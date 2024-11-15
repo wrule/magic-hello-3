@@ -1,6 +1,8 @@
 import dayjs from 'dayjs';
 import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
 
+let count = 0;
+
 function screenDrawing(ctx: SKRSContext2D, visits: number) {
   ctx.fillStyle = '#020314';
   ctx.fillRect(0, 0, 200, 120);
@@ -79,7 +81,9 @@ const GET = async () => {
   const canvas = createCanvas(200, 120);
   const ctx = canvas.getContext('2d');
 
-  screenDrawing(ctx, 1000);
+  count++;
+
+  screenDrawing(ctx, count);
 
   const buffer = await canvas.encode('png');
   return new Response(buffer, {
