@@ -34,13 +34,12 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
 
   ctx.font = '10px';
   const visWidth = ctx.measureText('vis').width;
-  const visHeight = 10; // 假设字体高度约等于字体大小
-  const maxX = 195 - visWidth; // 右边留出5px边距
-  const minX = 5; // 左边留出5px边距
-  const minY = 20; // 上边界线下留出5px边距
-  const maxY = 100; // 下边界线上留出5px边距
+  const maxX = 201 - visWidth;
+  const minX = 0;
+  const minY = 20;
+  const maxY = 100;
 
-  for (let i = 0; i < Math.min(visits, 500); i++) {
+  for (let i = 0; i < Math.min(visits, 320); i++) {
     const x = minX + Math.random() * (maxX - minX);
     const y = minY + Math.random() * (maxY - minY);
     ctx.textAlign = 'left';
@@ -60,7 +59,7 @@ const GET = async () => {
   const canvas = createCanvas(200, 120);
   const ctx = canvas.getContext('2d');
 
-  screenDrawing(ctx, 1000);
+  screenDrawing(ctx, 3);
 
   const buffer = await canvas.encode('png');
   return new Response(buffer, {
