@@ -285,6 +285,7 @@ const GET = async (
         TableName: 'visitor',
         Item: {
           pKey: key,
+          sortKey: key,
           time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
           count: 0,
           ...clientInfo,
