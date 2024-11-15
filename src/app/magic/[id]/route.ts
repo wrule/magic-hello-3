@@ -280,7 +280,7 @@ const GET = async () => {
           pKey: Math.random().toString(),
           sortKey: Math.random().toString(),
           time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
-          name: 'jimao',
+          ...clientInfo,
         },
       }));
       console.log(results);
