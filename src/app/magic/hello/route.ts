@@ -54,7 +54,7 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
   const centerX = 100;
   const centerY = 60;
 
-  ctx.fillStyle = '#020314';
+  ctx.fillStyle = 'red';
   ctx.fillRect(
     centerX - meMetrics.width/2 - 2,
     centerY - 7,
@@ -62,7 +62,7 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
     14,
   );
 
-  ctx.fillStyle = '#39FF14';
+  ctx.fillStyle = 'white';
   ctx.fillText(meText, centerX, centerY);
 
   ctx.font = '12px';
