@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { headers } from 'next/headers';
 import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand, QueryCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { NextRequest } from 'next/server';
 
 
