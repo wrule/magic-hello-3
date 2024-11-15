@@ -191,6 +191,7 @@ function getClientIP(headers: Headers): IPInfo {
 const client = new DynamoDBClient({
   region: process.env.AWS_REGION || 'ap-northeast-1',
   credentials: defaultProvider(),
+  logger: console,
 });
 const docClient = DynamoDBDocumentClient.from(client);
 
