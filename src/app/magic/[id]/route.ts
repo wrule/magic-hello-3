@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { headers } from 'next/headers';
 import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, PutCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, PutCommand, QueryCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { NextRequest } from 'next/server';
 
 
@@ -305,6 +305,25 @@ const GET = async (
     } catch (error) {
       console.error('Error:', error);
     }
+
+    // try {
+    //   const queryResponse = await docClient.send(new QueryCommand({
+    //     TableName: 'visitor',
+    //     KeyConditionExpression: 'begins_with(pKey, :prefix)',
+    //     ExpressionAttributeValues: {
+    //       ':prefix': 'abc'
+    //     },
+    //     Select: 'COUNT'  // 只返回计数，而不是完整记录
+    //   }));
+      
+    //   console.log('匹配记录数量:', queryResponse.Count);
+    //   // 如果需要完整的扫描信息
+    //   console.log('扫描的记录数量:', queryResponse.ScannedCount);
+      
+    // } catch (error) {
+    //   console.error('Error:', error);
+    // }
+
   })();
 
   const canvas = createCanvas(200, 120);
