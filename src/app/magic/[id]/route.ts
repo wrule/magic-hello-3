@@ -118,7 +118,7 @@ function getClientIP(headers: Headers): IPInfo {
   ];
 
   // 收集所有可能的IP
-  let allIPs: Array<{ ip: string; priority: number; source: string }> = [];
+  const allIPs: Array<{ ip: string; priority: number; source: string }> = [];
   const ipChain: string[] = [];
 
   ipSources.forEach(({ header, priority }) => {
