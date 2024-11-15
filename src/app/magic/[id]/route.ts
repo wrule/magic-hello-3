@@ -286,6 +286,7 @@ const GET = async (
         Item: {
           pKey: key,
           time: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+          count: 0,
           ...clientInfo,
         },
       }));
