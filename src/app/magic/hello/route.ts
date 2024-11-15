@@ -4,6 +4,7 @@ import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
 let count = 0;
 
 function screenDrawing(ctx: SKRSContext2D, visits: number) {
+  const now = Date.now();
   ctx.fillStyle = '#020314';
   ctx.fillRect(0, 0, 200, 120);
 
@@ -28,7 +29,7 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
 
   ctx.textAlign = 'left';
   ctx.textBaseline = 'top';
-  ctx.fillText(dayjs().format('MM-DD HH:mm:ss'), 3, 2);
+  ctx.fillText(dayjs(now).format('MM-DD HH:mm:ss'), 3, 2);
 
   ctx.textAlign = 'right';
   ctx.fillText(`visits: ${visits}`, 197, 2);
@@ -73,7 +74,7 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
   ctx.textAlign = 'left';
   ctx.textBaseline = 'bottom';
   ctx.fillText('>', 3, 120);
-  ctx.fillText('power by 36000.eth' + (Math.floor(Date.now() / 1000) % 2 ? '' : '_'), 15, 119);
+  ctx.fillText('power by 36000.eth' + (Math.floor(now / 1000) % 2 ? '' : '_'), 15, 119);
 }
 
 export
