@@ -1,6 +1,8 @@
 import dayjs from 'dayjs';
 import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
 
+export const dynamic = 'force-dynamic';
+
 let count = 0;
 
 function screenDrawing(ctx: SKRSContext2D, visits: number) {
