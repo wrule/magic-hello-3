@@ -1,8 +1,7 @@
-import { NextResponse } from 'next/server';
 import { createCanvas } from '@napi-rs/canvas';
 
 export
-const GET = async (request: Request) => {
+const GET = async () => {
   const canvas = createCanvas(120, 40);
   const ctx = canvas.getContext('2d');
   ctx.fillStyle = '#00ffff';
