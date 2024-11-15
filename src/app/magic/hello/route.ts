@@ -32,11 +32,6 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
   ctx.textAlign = 'right';
   ctx.fillText(`visits: ${visits}`, 197, 2);
 
-  // 在屏幕中心添加 "Me"
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
-  ctx.fillText('Me', 100, 60);
-
   ctx.textAlign = 'left';
   ctx.textBaseline = 'bottom';
   ctx.fillText('>', 3, 120);
