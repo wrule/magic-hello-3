@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import { createCanvas, SKRSContext2D } from '@napi-rs/canvas';
+import { DynamoDBClient, ListTablesCommand } from '@aws-sdk/client-dynamodb';
 
 export const dynamic = 'force-dynamic';
 
@@ -81,6 +82,18 @@ function screenDrawing(ctx: SKRSContext2D, visits: number) {
 
 export
 const GET = async () => {
+
+  (async () => {
+    const client = new DynamoDBClient({ region: 'ap-northeast-1' });
+    const command = new ListTablesCommand({ });
+    try {
+      const results = await client.send(command);
+      console.log(results.TableNames?.join("\n"));
+    } catch (err) {
+      console.error(err);
+    }
+  })();
+
   const canvas = createCanvas(200, 120);
   const ctx = canvas.getContext('2d');
 
